@@ -1,0 +1,1 @@
+{"expo":{"name":"ALAT Financial System","slug":"alat-financial-system","version":"1.0.0","orientation":"portrait","scheme":"alatfinance","userInterfaceStyle":"automatic","ios":{"supportsTablet":true},"android":{"adaptiveIcon":{"backgroundColor":"#020617"}},"plugins":["expo-secure-store","expo-local-authentication","expo-notifications"]}}

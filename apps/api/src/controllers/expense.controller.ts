@@ -1,0 +1,8 @@
+import { Request, Response, NextFunction } from 'express';
+import { Expense } from '../models/Expense.js';
+import { Transaction } from '../models/Transaction.js';
+import { pagination, dateFilter } from '../utils/query.js';
+export async function listExpenses(req: Request, res: Response, next: NextFunction) { try { const {limit, skip, page}=pagination(req.query); const filter:any={ business: req.user!.activeBusiness, ...dateFilter(req.query) }; if(req.query.category) filter.category=req.query.category; if(req.query.status) filter.approvalStatus=req.query.status; const [items,total]=await Promise.all([Expense.find(filter).sort({date:-1}).skip(skip).limit(limit), Expense.countDocuments(filter)]); res.json({success:true,data:{items,total,page,limit}}); } catch(e){next(e)} }
+export async function createExpense(req: Request, res: Response, next: NextFunction) { try { const expense=await Expense.create({ ...req.body, business:req.user!.activeBusiness, createdBy:req.user!.userId }); await Transaction.create({business:req.user!.activeBusiness,type:'expense',source:'expense',amount:req.body.amount,description:req.body.title,referenceId:String(expense._id)}); res.status(201).json({success:true,data:expense}); } catch(e){next(e)} }
+export async function updateExpense(req: Request, res: Response, next: NextFunction) { try { const expense=await Expense.findOneAndUpdate({_id:req.params.id,business:req.user!.activeBusiness},req.body,{new:true}); res.json({success:true,data:expense}); } catch(e){next(e)} }
+export async function deleteExpense(req: Request, res: Response, next: NextFunction) { try { await Expense.findOneAndDelete({_id:req.params.id,business:req.user!.activeBusiness}); res.json({success:true,message:'Expense deleted'}); } catch(e){next(e)} }

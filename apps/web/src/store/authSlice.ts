@@ -1,0 +1,3 @@
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'; import { api } from '../lib/api';
+export const login=createAsyncThunk('auth/login',async(input:{email:string;password:string})=>{const {data}=await api.post('/auth/login',input); localStorage.setItem('alat_access_token',data.data.accessToken); return data.data.user;});
+const slice=createSlice({name:'auth',initialState:{user:null as any,loading:false},reducers:{logout(s){s.user=null;localStorage.removeItem('alat_access_token')}},extraReducers:b=>{b.addCase(login.pending,s=>{s.loading=true}).addCase(login.fulfilled,(s,a)=>{s.loading=false;s.user=a.payload}).addCase(login.rejected,s=>{s.loading=false})}}); export const {logout}=slice.actions; export default slice.reducer;

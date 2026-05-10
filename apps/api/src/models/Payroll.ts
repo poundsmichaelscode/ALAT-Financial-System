@@ -1,0 +1,3 @@
+import mongoose, { Schema } from 'mongoose';
+const payrollSchema = new Schema({ business: { type: Schema.Types.ObjectId, ref: 'Business', required: true, index: true }, employee: { type: Schema.Types.ObjectId, ref: 'Employee', required: true }, month: { type: String, required: true }, baseSalary: Number, bonuses: { type: Number, default: 0 }, deductions: { type: Number, default: 0 }, tax: { type: Number, default: 0 }, netPay: Number, status: { type: String, enum: ['draft','pending_approval','approved','paid'], default: 'draft' }, payslipUrl: String }, { timestamps: true });
+export const Payroll = mongoose.model('Payroll', payrollSchema);

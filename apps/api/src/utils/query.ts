@@ -1,0 +1,2 @@
+export function pagination(query: any) { const page = Math.max(Number(query.page || 1), 1); const limit = Math.min(Math.max(Number(query.limit || 10), 1), 100); return { page, limit, skip: (page - 1) * limit }; }
+export function dateFilter(query: any) { const f:any = {}; if (query.startDate || query.endDate) { f.date = {}; if (query.startDate) f.date.$gte = new Date(query.startDate); if (query.endDate) f.date.$lte = new Date(query.endDate); } return f; }
