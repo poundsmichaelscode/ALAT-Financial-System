@@ -1,6 +1,6 @@
 {
   "name": "alat-financial-system",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "description": "Full-stack fintech finance, expense, payroll, invoice, receipt and AI analytics system.",
   "scripts": {
@@ -13,15 +13,7 @@
     "lint": "npm run lint -w apps/api && npm run lint -w apps/web",
     "seed": "npm run seed -w apps/api"
   },
-  "workspaces": [
-    "apps/api",
-    "apps/web",
-    "apps/mobile"
-  ],
-  "devDependencies": {
-    "concurrently": "^9.1.2"
-  },
-  "engines": {
-    "node": ">=20"
-  }
+  "workspaces": ["apps/api", "apps/web", "apps/mobile"],
+  "devDependencies": {"concurrently": "^9.1.2"},
+  "engines": {"node": ">=20"}
 }

@@ -1,4 +1,9 @@
 import { Router } from 'express';
 import { requireAuth } from '../middlewares/auth.js';
-import { profitLoss } from '../controllers/report.controller.js';
-const router=Router(); router.get('/profit-loss',requireAuth,profitLoss); export default router;
+import { cashFlow, profitLoss, taxSummary } from '../controllers/report.controller.js';
+const router=Router();
+router.use(requireAuth);
+router.get('/profit-loss', profitLoss);
+router.get('/cash-flow', cashFlow);
+router.get('/tax', taxSummary);
+export default router;

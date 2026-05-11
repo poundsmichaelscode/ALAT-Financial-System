@@ -6,11 +6,13 @@ services:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
+
   redis:
     image: redis:7-alpine
     restart: unless-stopped
     ports:
-     - "6380:6380"
+      - "6380:6379"
+
   api:
     build: ./apps/api
     env_file: ./apps/api/.env
@@ -18,9 +20,10 @@ services:
       - mongo
       - redis
     ports:
-      - "5000:5000"
+      - "5050:5050"
     volumes:
       - ./apps/api:/app
       - /app/node_modules
+
 volumes:
   mongo_data:
