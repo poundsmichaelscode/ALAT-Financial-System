@@ -1,0 +1,12 @@
+{
+  "name": "ALAT Financial System",
+  "short_name": "ALAT Finance",
+  "description": "Premium financial management SaaS for expenses, invoices, receipts, payroll and business analytics.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#170C79",
+  "theme_color": "#170C79",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

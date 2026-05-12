@@ -1,7 +1,10 @@
 import { Router } from 'express';
 import { requireAuth } from '../middlewares/auth.js';
-import { createReceipt, listReceipts } from '../controllers/receipt.controller.js';
+import { createReceipt, deleteReceipt, downloadReceiptPdf, downloadReceiptXlsx, listReceipts, updateReceipt } from '../controllers/receipt.controller.js';
 const router = Router();
 router.use(requireAuth);
 router.route('/').get(listReceipts).post(createReceipt);
+router.get('/:id/pdf', downloadReceiptPdf);
+router.get('/:id/xlsx', downloadReceiptXlsx);
+router.route('/:id').patch(updateReceipt).delete(deleteReceipt);
 export default router;

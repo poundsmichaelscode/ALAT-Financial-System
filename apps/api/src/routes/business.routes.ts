@@ -1,4 +1,11 @@
 import { Router } from 'express';
 import { requireAuth } from '../middlewares/auth.js';
-import { createBusiness, listBusinesses } from '../controllers/business.controller.js';
-const router=Router(); router.use(requireAuth); router.route('/').get(listBusinesses).post(createBusiness); export default router;
+import { addClient, addProject, businessPerformance, createBusiness, deleteBusiness, listBusinesses, updateBusiness } from '../controllers/business.controller.js';
+const router = Router();
+router.use(requireAuth);
+router.route('/').get(listBusinesses).post(createBusiness);
+router.get('/:id/performance', businessPerformance);
+router.post('/:id/clients', addClient);
+router.post('/:id/projects', addProject);
+router.route('/:id').patch(updateBusiness).delete(deleteBusiness);
+export default router;
